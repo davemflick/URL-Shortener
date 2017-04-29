@@ -1,0 +1,34 @@
+{
+  "name": "url-shortner",
+  "version": "1.0.0",
+  "description": "A microservice that provides a shortened link to a given URL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davemflick/URL-Shortener.git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "David Flick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davemflick/URL-Shortener/issues"
+  },
+  "homepage": "https://github.com/davemflick/URL-Shortener#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "pug": "^2.0.0-beta.12"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "engines": {
+    "node": "6.10.2",
+    "npm": "3.10.10"
+  }
+}
