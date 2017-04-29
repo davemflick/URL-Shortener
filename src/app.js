@@ -17,8 +17,11 @@ app.get('/', (req, res)=>{
 
 //Obtain URL extension as Argument. Return a JSON object with Original and Shortened URL
 
-app.get('/URL', (req, res)=>{
-	
+app.get('/*', (req, res)=>{
+	req.params.original = req.params['0'];
+	let randomNum = Math.floor(Math.random() * 100);
+	req.params.shortened = 'http://' + req.hostname + '/' + randomNum;
+	res.send(req.params);
 })
 
 
