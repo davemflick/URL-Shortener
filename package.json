@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/davemflick/URL-Shortener#readme",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "mongoose": "^4.9.6",
     "pug": "^2.0.0-beta.12"
   },
   "devDependencies": {
