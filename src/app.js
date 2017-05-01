@@ -6,16 +6,10 @@ const path = require('path');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var mongo = require('mongodb');
-var config = require('/Users/davidflick/Documents/fcc/URL-Shortener/config.js');
-var Url = require('/Users/davidflick/Documents/fcc/URL-Shortener/url');
 
-app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(bodyParser.json());
+//mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
 
 //Connect to Pug and Public files
 app.use(express.static(__dirname + '/public'));
@@ -29,13 +23,14 @@ app.get('/', (req, res)=>{
 
 //Obtain URL extension as Argument. Return a JSON object with Original and Shortened URL
 app.get('/short/*', (req, res)=>{
+	console.log("What the heck");
 
-	req.params.original = req.params['0'];
-	let randomNum = Math.floor(Math.random() * 100);
-	res.json({
-		Original: req.params['0'],
-		Short: 'http://' + req.hostname + '/' + randomNum,
-	})
+	// req.params.original = req.params['0'];
+	// let randomNum = Math.floor(Math.random() * 100);
+	// res.json({
+	// 	Original: req.params['0'],
+	// 	Short: 'http://' + req.hostname + '/' + randomNum,
+	// })
 	res.send(req.params);
 })
 
