@@ -4,7 +4,7 @@
   "description": "A microservice that provides a shortened link to a given URL.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "transpile-es2015": "babel src -d lib"
   },
   "repository": {
     "type": "git",
@@ -21,13 +21,20 @@
   },
   "homepage": "https://github.com/davemflick/URL-Shortener#readme",
   "dependencies": {
+    "babel-core": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.24.1",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "mongodb": "~3.4.3",
     "mongoose": "^4.9.6",
-    "pug": "^2.0.0-beta.12",
-    "mongodb": "~3.4.3"
+    "pug": "^2.0.0-beta.12"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.24.1",
     "nodemon": "^1.11.0"
   },
   "engines": {

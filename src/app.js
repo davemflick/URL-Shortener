@@ -1,51 +1,55 @@
-'use strict';
 
-const express = require('express');
-const app = express();
-const path = require('path');
-var bodyParser = require('body-parser');
+var express = require('express');
 var mongoose = require('mongoose');
-var mongo = require('mongodb');
+var UrlEntry = require('./UrlEntry');
+var createFullUrl = require('./url-utils');
+var isValidUrl = require('./url-utils');
+var getShortCode = require('./mongo-utils');
+var isDuplicate = require('./mongo-utils');
+var insertNew = require('./mongo-utils');
+require('../.babelrc')
 
 
-
-//mongoose.connect('mongodb://' + config.db.host + '/' + config.db.name);
-
-//Connect to Pug and Public files
-app.use(express.static(__dirname + '/public'));
-app.set('view engine', 'pug');
-app.set('views', __dirname + '/views');
-
-//Home Page
-app.get('/', (req, res)=>{
-	res.render('body');
-})
-
-//Obtain URL extension as Argument. Return a JSON object with Original and Shortened URL
-app.get('/short/*', (req, res)=>{
-	console.log("What the heck");
-
-	// req.params.original = req.params['0'];
-	// let randomNum = Math.floor(Math.random() * 100);
-	// res.json({
-	// 	Original: req.params['0'],
-	// 	Short: 'http://' + req.hostname + '/' + randomNum,
-	// })
-	res.send(req.params);
-})
-
-
-
-//Set up Server. 3000 for local and process.env.PORT for heroku.
-app.listen(process.env.PORT || 3000, ()=> {
-	console.log("The frontend server is running on port 3000 or Heroku");
+//import { UrlEntry } from './urlEntry';
+// import { createFullUrl, isValidUrl } from './url-utils';
+// import { getShortCode, isDuplicate, insertNew } from './mongo-utils';
+ 
+mongoose.Promise = global.Promise;
+ 
+export const app = express();
+mongoose.connect('mongodb://localhost:27017/urlShortener');
+ 
+app.get('/:shortCode', (req, res) => {
+  let shortCode = parseInt(req.params.shortCode);
+  if (isNaN(shortCode)) {
+    res.status(200).json({ error: 'Invalid URL shortCode. It must be a number.' })
+  } else {
+    UrlEntry.findOne({ shortCode }).then(doc => {
+      if (!doc) {
+        res.status(404).json({ error: 'Page not found' });
+      } else {
+        res.redirect(doc.original);
+      }
+    });
+  }
 });
-
-
-
-
-
-
+ 
+app.get('/new/*', (req, res) => {
+  let url = req.params[0];
+  if (isValidUrl(url)) {
+    isDuplicate(url).then(exists => {
+      if (exists) {
+        res.status(500).json({ error: 'URL already exists in the database.', shortCode: exists });
+      } else {
+        insertNew(url).then(inserted => {
+          res.status(200).json({ message: 'Url successfully shortened', url: createFullUrl(req, inserted.shortCode) });
+        });
+      }
+    });
+  } else {
+    res.status(500).json({ error: 'Invalid URL format. Input URL must comply to the following: http(s)://(www.)domain.ext(/)(path)'});
+  }
+});
 
 
 
