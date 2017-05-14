@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+ .headerContainer
+  h1 Quick URL shortener
+  p A #{title} Microservice
+ .bodyContainer
+  h2 Examples
+  h4.explained Put an extenstion of /new/ + 'a vaild URL', and get a JSON object with original and short-links to extended URL.
+  p.exm https://my-short-url-service.herokuapp.com/new/https://www.google.com/
+  p.exm https://my-short-url-service.herokuapp.com/new/BJ6sa6Sgb
+
+ .creditsContainer
+  h3 Credits
+  p Was built following along with lefkowitz.me, author Michael's 
+   a(href="http://lefkowitz.me/thoughts/2016/05/05/men-stack-building-a-url-shortener-with-mongodb-express-and-node-js/" target="_blank") tutorial
+

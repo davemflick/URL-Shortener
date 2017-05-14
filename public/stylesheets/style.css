@@ -1,8 +1,37 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  text-align: center;
+  background-color: #ddd;
+  width: 100%;
+  margin: 0;
+}
+
+.headerContainer {
+	width: 100%;
+	background: #555;
+	padding: 30px;
+	color: #fff;
 }
 
 a {
   color: #00B7FF;
+}
+
+.explained {
+	color: #EB5A5A;
+}
+
+.exm {
+	color: #5022FD;
+}
+
+.bodyContainer {
+	padding: 30px;
+}
+
+.creditsContainer {
+	color: #fff;
+	padding: 30px;
+	background-color: #555;
+	width: 100%;
 }
